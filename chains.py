@@ -57,9 +57,12 @@ def load_embedding_model(embedding_model_name: str, logger=BaseLogger(), config=
 
 
 def load_llm(llm_name: str, logger=BaseLogger(), config={}):
-    if llm_name == "gpt-4":
+    if llm_name == "gpt-4o":
+        logger.info("LLM: Using GPT-4o")
+        return ChatOpenAI(temperature=0, model_name="gpt-4o", streaming=True)
+    elif llm_name == "gpt-4-turbo":
         logger.info("LLM: Using GPT-4")
-        return ChatOpenAI(temperature=0, model_name="gpt-4", streaming=True)
+        return ChatOpenAI(temperature=0, model_name="gpt-4-turbo", streaming=True)
     elif llm_name == "gpt-3.5":
         logger.info("LLM: Using GPT-3.5")
         return ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo", streaming=True)
